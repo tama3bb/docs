@@ -1,14 +1,8 @@
-import streamlit as st
 from openai import OpenAI
+import streamlit as st
 
-st.title("ChatGPT-like clone")
-with st.expander("ℹ️ Disclaimer"):
-    st.caption(
-        """We appreciate your engagement! Please note, this demo is designed to
-        process a maximum of 10 interactions and may be unavailable if too many
-        people use the service concurrently. Thank you for your understanding.
-        """
-    )
+st.title("おともだち")
+st.caption("チャットの履歴は残らないよ。話題を変えるときはリロードしてね。")
 
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
@@ -27,12 +21,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 if len(st.session_state.messages) >= st.session_state.max_messages:
-    st.info(
-        """Notice: The maximum message limit for this demo version has been reached. We value your interest!
-        We encourage you to experience further interactions by building your own application with instructions
-        from Streamlit's [Build a basic LLM chat app](https://docs.streamlit.io/knowledge-base/tutorials/build-conversational-apps)
-        tutorial. Thank you for your understanding."""
-    )
+    st.info("""Notice: The maximum message limit has been reached.""")
 
 else:
     if prompt := st.chat_input("What is up?"):
