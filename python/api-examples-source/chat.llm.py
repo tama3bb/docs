@@ -1,8 +1,8 @@
 from openai import OpenAI
 import streamlit as st
 
-st.title("おともだち")
-st.caption("チャットの履歴は残らないよ。話題を変えるときはリロードしてね。")
+st.title("わんわんのおともだち")
+st.caption("チャットの履歴は残らないよ。話題を変えるときはリロードしてね。macOS では Chrome で開いてね。ソースコードを貼り付けるときは ``` の行で囲むといいよ。")
 
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
@@ -24,7 +24,7 @@ if len(st.session_state.messages) >= st.session_state.max_messages:
     st.info("""Notice: The maximum message limit has been reached.""")
 
 else:
-    if prompt := st.chat_input("What is up?"):
+    if prompt := st.chat_input("Message"):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
